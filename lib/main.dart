@@ -11,7 +11,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 void main() {
   runApp(
     MaterialApp(
-      title: 'Mon Manchitra',
+      title: 'মনমানচিত্র',
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
