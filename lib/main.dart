@@ -175,48 +175,68 @@ class _WebViewWithSplashScreenState extends State<WebViewWithSplashScreen> {
           child: WillPopScope(
             onWillPop: _handleBackPressed,
             child: Scaffold(
-              //wrap this with safe area............................................................................
-              body: Stack(
-                children: [
-                  WebViewWidget(
-                    controller: _controller,
-                    gestureRecognizers: {
-                      Factory(() => dragGesturePullToRefresh)
-                    }, // HERE
-                  ),
-                  if (isLoading)
-                    Center(
-                      child: Container(
-                        height: 100,
-                        // width: MediaQuery.of(context).size.width,
-                        color: Colors.transparent,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Image.asset(
-                            //   'assets/mangaPro.png',
-                            //   height: 150,
-                            //   width: 150,
-                            // ), // Splash screen image
-                            // SizedBox(
-                            //   height: 20,
-                            // ),
-                            // LoadingAnimationWidget.twistingDots(
-                            //   leftDotColor: Color.fromARGB(255, 211, 153, 7),
-                            //   rightDotColor: Color.fromARGB(249, 41, 40, 40),
-                            //   size: 50,
 
-                            // ),
-                            LoadingAnimationWidget.staggeredDotsWave(
-                                color: Color.fromRGBO(197, 109, 54, 1.0),
-                                size: 80)
-                          ],
+                //wrap this with safe area............................................................................
+                body: Stack(
+                  children: [
+                    WebViewWidget(
+                      controller: _controller,
+                      gestureRecognizers: {
+                        Factory(() => dragGesturePullToRefresh)
+                      }, // HERE
+                    ),
+                    if (isLoading)
+                      Center(
+                        child: Container(
+                          height: 100,
+                          // width: MediaQuery.of(context).size.width,
+                          color: Colors.transparent,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Image.asset(
+                              //   'assets/mangaPro.png',
+                              //   height: 150,
+                              //   width: 150,
+                              // ), // Splash screen image
+                              // SizedBox(
+                              //   height: 20,
+                              // ),
+                              // LoadingAnimationWidget.twistingDots(
+                              //   leftDotColor: Color.fromARGB(255, 211, 153, 7),
+                              //   rightDotColor: Color.fromARGB(249, 41, 40, 40),
+                              //   size: 50,
+
+                              // ),
+                              LoadingAnimationWidget.staggeredDotsWave(
+                                  color: Color.fromRGBO(197, 109, 54, 1.0),
+                                  size: 80)
+                            ],
+                          ),
                         ),
                       ),
+                  ],
+                ),
+                floatingActionButton: SizedBox(
+                  width: 30,
+                  height: 30,
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MangaPro()),
+                      );
+                    },
+                    child: const Icon(Icons.home),
+                    backgroundColor: const Color.fromARGB(28, 255, 153, 0),
+                    splashColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100.0),
+                      side: BorderSide(
+                          color: const Color.fromARGB(36, 0, 0, 0), width: 2.0),
                     ),
-                ],
-              ),
-            ),
+                  ),
+                )),
           ),
         );
       }),

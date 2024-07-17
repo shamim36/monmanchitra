@@ -32,7 +32,6 @@ class _MangaProState extends State<MangaPro> {
     {'url': 'https://mangakakalot.com/', 'name': 'MangaKakalot.com'},
     {'url': 'https://drake-scans.com/', 'name': 'DarkScans.com'},
     {'url': 'https://mangapark.net/', 'name': 'MangaPark.net'},
-    {'url': 'https://hentai20.io/', 'name': ' | + | '},
   ];
 
   @override
@@ -144,6 +143,7 @@ class _MangaProState extends State<MangaPro> {
                 ElevatedButton(
                   onPressed: () {
                     _searchGoogle(context, _controller.text);
+                    _controller.clear();
                   },
                   child: Text(
                     'Google Search',
@@ -277,7 +277,7 @@ class _MangaProState extends State<MangaPro> {
                     ),
                   ],
                 ),
-                _google_search_count == 0
+                _googleHistory.length == 0
                     ? Center(
                         child: Text(
                         'Empty History',
@@ -333,7 +333,7 @@ class _MangaProState extends State<MangaPro> {
                     ),
                   ],
                 ),
-                _fixedMangaHistory.isEmpty
+                _fixedMangaHistory.length == 0
                     ? Center(
                         child: Text(
                         'Empty History',
@@ -353,39 +353,45 @@ class _MangaProState extends State<MangaPro> {
 
   Widget _buildFixedMangaHistoryList() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemCount: _fixed_manga_history_count,
-        reverse: true,
-        itemBuilder: (context, index) {
-          final entry = _fixedMangaHistory[index];
-
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              tileColor: Colors.orange,
-              title: Text(
-                entry['name']!,
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16,
-                ),
-              ),
-              subtitle: Text(
-                entry['url']!,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                ),
-              ),
-              onTap: () =>
-                  _launchURL(context, _fixedMangaHistory[index]['url']!),
+      padding: const EdgeInsets.fromLTRB(14, 0, 14, 20),
+      child: _fixedMangaHistory.isEmpty
+          ? Center(child: Text('Empty History', style: TextStyle(fontSize: 16)))
+          : ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: _fixed_manga_history_count,
+              reverse: true,
+              itemBuilder: (context, index) {
+                if (index < _fixedMangaHistory.length) {
+                  final entry = _fixedMangaHistory[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: ListTile(
+                        tileColor: Colors.orange,
+                        title: Text(
+                          entry['name']!,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                          ),
+                        ),
+                        subtitle: Text(
+                          entry['url']!,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                        onTap: () => _launchURL(context, entry['url']!),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Container(); // or some fallback widget
+                }
+              },
             ),
-          );
-        },
-      ),
     );
   }
 
@@ -399,11 +405,15 @@ class _MangaProState extends State<MangaPro> {
       ),
       itemCount: _fixed_link_length,
       itemBuilder: (context, index) {
-        final link = _fixedLinks[index];
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: _elevatedButton(context, link['url']!, link['name']!),
-        );
+        if (index < _fixedLinks.length) {
+          final link = _fixedLinks[index];
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _elevatedButton(context, link['url']!, link['name']!),
+          );
+        } else {
+          return Container(); // or some fallback widget
+        }
       },
     );
   }
