@@ -231,7 +231,61 @@ class _MangaProState extends State<MangaPro> {
                 ),
                 _buildLinksList(),
                 SizedBox(
-                  height: 20,
+                  height: 25,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+                      child: Text(
+                        'Google History',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          // backgroundColor: Color.fromARGB(64, 51, 40, 9),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _google_history_expand = !_google_history_expand;
+                          _google_history_expand
+                              ? _google_search_count = _googleHistory.length
+                              : _google_search_count = 4;
+                          _google_history_expand
+                              ? _tag_for_google_history = "less"
+                              : _tag_for_google_history = "more";
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 25, 10),
+                        child: Text(
+                          _tag_for_google_history,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: _google_history_expand
+                                ? Color.fromARGB(255, 0, 253, 13)
+                                : Color.fromARGB(255, 255, 187, 0),
+                            // backgroundColor: Color.fromARGB(64, 51, 40, 9),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                _google_search_count == 0
+                    ? Center(
+                        child: Text(
+                        'Empty History',
+                        style: TextStyle(fontSize: 16),
+                      ))
+                    : _buildGoogleHistoryList(),
+                SizedBox(
+                  height: 25,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -287,62 +341,8 @@ class _MangaProState extends State<MangaPro> {
                       ))
                     : _buildFixedMangaHistoryList(),
                 SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
-                      child: Text(
-                        'Google History',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          // backgroundColor: Color.fromARGB(64, 51, 40, 9),
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          _google_history_expand = !_google_history_expand;
-                          _google_history_expand
-                              ? _google_search_count = _googleHistory.length
-                              : _google_search_count = 4;
-                          _google_history_expand
-                              ? _tag_for_google_history = "less"
-                              : _tag_for_google_history = "more";
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 25, 10),
-                        child: Text(
-                          _tag_for_google_history,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: _google_history_expand
-                                ? Color.fromARGB(255, 0, 253, 13)
-                                : Color.fromARGB(255, 255, 187, 0),
-                            // backgroundColor: Color.fromARGB(64, 51, 40, 9),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                _google_search_count == 0
-                    ? Center(
-                        child: Text(
-                        'Empty History',
-                        style: TextStyle(fontSize: 16),
-                      ))
-                    : _buildGoogleHistoryList(),
-                SizedBox(
-                  height: 20,
-                )
               ],
             ),
           ),
