@@ -358,6 +358,7 @@ class _MangaProState extends State<MangaPro> {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemCount: _fixed_manga_history_count,
+        reverse: true,
         itemBuilder: (context, index) {
           final entry = _fixedMangaHistory[index];
 
@@ -412,6 +413,7 @@ class _MangaProState extends State<MangaPro> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: _googleHistory.length,
+      reverse: true,
       itemBuilder: (context, index) {
         final entry = _googleHistory[index];
         return Padding(
