@@ -12,10 +12,10 @@ class _MangaProState extends State<MangaPro> {
   int _fixed_link_length = 4;
   bool _fixed_link_expand = false;
   String _tag_for_fixed_link = "more";
-  int _google_search_count = 4;
+  int _google_search_count = 2;
   bool _google_history_expand = false;
   String _tag_for_google_history = "more";
-  int _fixed_manga_history_count = 4;
+  int _fixed_manga_history_count = 2;
   bool _fixed_manga_history_expand = false;
   String _tag_for_fixed_manga_history = "more";
   final TextEditingController _controller = TextEditingController();
@@ -45,7 +45,7 @@ class _MangaProState extends State<MangaPro> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final history = prefs.getStringList('googleHistory') ?? [];
     setState(() {
-      _googleHistory = history.map((entry) {
+      _googleHistory = history.reversed.map((entry) {
         final parts = entry.split('||');
         return {'query': parts[0], 'url': parts[1]};
       }).toList();
@@ -67,7 +67,7 @@ class _MangaProState extends State<MangaPro> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final history = prefs.getStringList('fixedMangaHistory') ?? [];
     setState(() {
-      _fixedMangaHistory = history.map((entry) {
+      _fixedMangaHistory = history.reversed.map((entry) {
         // final parts = entry.split('||');
         return {'name': '', 'url': entry};
       }).toList();
@@ -254,7 +254,7 @@ class _MangaProState extends State<MangaPro> {
                           _google_history_expand = !_google_history_expand;
                           _google_history_expand
                               ? _google_search_count = _googleHistory.length
-                              : _google_search_count = 4;
+                              : _google_search_count = 2;
                           _google_history_expand
                               ? _tag_for_google_history = "less"
                               : _tag_for_google_history = "more";
@@ -277,7 +277,7 @@ class _MangaProState extends State<MangaPro> {
                     ),
                   ],
                 ),
-                _googleHistory.length == 0
+                _googleHistory.isEmpty
                     ? Center(
                         child: Text(
                         'Empty History',
@@ -310,7 +310,7 @@ class _MangaProState extends State<MangaPro> {
                           _fixed_manga_history_expand
                               ? _fixed_manga_history_count =
                                   _fixedMangaHistory.length
-                              : _fixed_manga_history_count = 4;
+                              : _fixed_manga_history_count = 2;
                           _fixed_manga_history_expand
                               ? _tag_for_fixed_manga_history = "less"
                               : _tag_for_fixed_manga_history = "more";
@@ -333,7 +333,7 @@ class _MangaProState extends State<MangaPro> {
                     ),
                   ],
                 ),
-                _fixedMangaHistory.length == 0
+                _fixedMangaHistory.isEmpty
                     ? Center(
                         child: Text(
                         'Empty History',
@@ -360,36 +360,31 @@ class _MangaProState extends State<MangaPro> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: _fixed_manga_history_count,
-              reverse: true,
               itemBuilder: (context, index) {
-                if (index < _fixedMangaHistory.length) {
-                  final entry = _fixedMangaHistory[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      child: ListTile(
-                        tileColor: Colors.orange,
-                        title: Text(
-                          entry['name']!,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                          ),
+                final entry = _fixedMangaHistory[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    child: ListTile(
+                      tileColor: Colors.orange,
+                      title: Text(
+                        entry['name']!,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
                         ),
-                        subtitle: Text(
-                          entry['url']!,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                          ),
-                        ),
-                        onTap: () => _launchURL(context, entry['url']!),
                       ),
+                      subtitle: Text(
+                        entry['url']!,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                      ),
+                      onTap: () => _launchURL(context, entry['url']!),
                     ),
-                  );
-                } else {
-                  return Container(); // or some fallback widget
-                }
+                  ),
+                );
               },
             ),
     );
@@ -422,8 +417,7 @@ class _MangaProState extends State<MangaPro> {
     return ListView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      itemCount: _googleHistory.length,
-      reverse: true,
+      itemCount: _google_search_count,
       itemBuilder: (context, index) {
         final entry = _googleHistory[index];
         return Padding(
