@@ -93,34 +93,34 @@ class _MangaProState extends State<MangaPro> {
           'assets/mangaPro.png',
         ),
         toolbarHeight: 70,
-        backgroundColor: Color.fromARGB(255, 74, 62, 44),
+        backgroundColor: const Color.fromARGB(255, 74, 62, 44),
         elevation: 100,
-        shadowColor: Color.fromARGB(132, 0, 0, 0),
+        shadowColor: const Color.fromARGB(132, 0, 0, 0),
       ),
-      backgroundColor: Color.fromARGB(255, 102, 98, 51),
+      backgroundColor: const Color.fromARGB(255, 102, 98, 51),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
-                    color: Color.fromARGB(
+                    color: const Color.fromARGB(
                         45, 212, 127, 16), // Background color of the text field
                     child: TextFormField(
                       controller: _controller,
                       decoration: InputDecoration(
                         labelText: 'Search on Google',
                         hintText: 'Search on Google',
-                        labelStyle: TextStyle(
-                            color: const Color.fromARGB(255, 0, 3, 5),
+                        labelStyle: const TextStyle(
+                            color: Color.fromARGB(255, 0, 3, 5),
                             fontWeight: FontWeight.bold,
                             fontSize: 16), // Label text color
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color.fromARGB(179, 255, 175, 1),
                             ),
                             borderRadius:
@@ -132,20 +132,20 @@ class _MangaProState extends State<MangaPro> {
                                   .orange.shade700), // Focused border color
                         ),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 16), // Text color
                     ),
                   ),
                 ),
-                SizedBox(height: 0),
+                const SizedBox(height: 0),
                 ElevatedButton(
                   onPressed: () {
                     _searchGoogle(context, _controller.text);
                     _controller.clear();
                   },
-                  child: Text(
+                  child: const Text(
                     'Google Search',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
@@ -182,14 +182,14 @@ class _MangaProState extends State<MangaPro> {
                         Colors.black), // Text color
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 80,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
                       child: Text(
                         'Fixed Manga Sites',
                         style: TextStyle(
@@ -220,8 +220,8 @@ class _MangaProState extends State<MangaPro> {
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                             color: _fixed_link_expand
-                                ? Color.fromARGB(255, 0, 253, 13)
-                                : Color.fromARGB(255, 255, 187, 0),
+                                ? const Color.fromARGB(255, 0, 253, 13)
+                                : const Color.fromARGB(255, 255, 187, 0),
                             // backgroundColor: Color.fromARGB(64, 51, 40, 9),
                           ),
                         ),
@@ -230,14 +230,14 @@ class _MangaProState extends State<MangaPro> {
                   ],
                 ),
                 _buildLinksList(),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
                       child: Text(
                         'Google History',
                         style: TextStyle(
@@ -268,8 +268,8 @@ class _MangaProState extends State<MangaPro> {
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                             color: _google_history_expand
-                                ? Color.fromARGB(255, 0, 253, 13)
-                                : Color.fromARGB(255, 255, 187, 0),
+                                ? const Color.fromARGB(255, 0, 253, 13)
+                                : const Color.fromARGB(255, 255, 187, 0),
                             // backgroundColor: Color.fromARGB(64, 51, 40, 9),
                           ),
                         ),
@@ -278,20 +278,20 @@ class _MangaProState extends State<MangaPro> {
                   ],
                 ),
                 _googleHistory.isEmpty
-                    ? Center(
+                    ? const Center(
                         child: Text(
                         'Empty History',
                         style: TextStyle(fontSize: 16),
                       ))
                     : _buildGoogleHistoryList(),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
                       child: Text(
                         'Fixed Manga History',
                         style: TextStyle(
@@ -324,8 +324,8 @@ class _MangaProState extends State<MangaPro> {
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                             color: _fixed_manga_history_expand
-                                ? Color.fromARGB(255, 0, 253, 13)
-                                : Color.fromARGB(255, 255, 187, 0),
+                                ? const Color.fromARGB(255, 0, 253, 13)
+                                : const Color.fromARGB(255, 255, 187, 0),
                             // backgroundColor: Color.fromARGB(64, 51, 40, 9),
                           ),
                         ),
@@ -334,13 +334,13 @@ class _MangaProState extends State<MangaPro> {
                   ],
                 ),
                 _fixedMangaHistory.isEmpty
-                    ? Center(
+                    ? const Center(
                         child: Text(
                         'Empty History',
                         style: TextStyle(fontSize: 16),
                       ))
                     : _buildFixedMangaHistoryList(),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
               ],
@@ -355,10 +355,10 @@ class _MangaProState extends State<MangaPro> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(14, 0, 14, 20),
       child: _fixedMangaHistory.isEmpty
-          ? Center(child: Text('Empty History', style: TextStyle(fontSize: 16)))
+          ? const Center(child: Text('Empty History', style: const TextStyle(fontSize: 16)))
           : ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: _fixed_manga_history_count,
               itemBuilder: (context, index) {
                 final entry = _fixedMangaHistory[index];
@@ -369,14 +369,14 @@ class _MangaProState extends State<MangaPro> {
                       tileColor: Colors.orange,
                       title: Text(
                         entry['name']!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16,
                         ),
                       ),
                       subtitle: Text(
                         entry['url']!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
                         ),
@@ -393,8 +393,8 @@ class _MangaProState extends State<MangaPro> {
   Widget _buildLinksList() {
     return GridView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 3,
       ),
@@ -416,7 +416,7 @@ class _MangaProState extends State<MangaPro> {
   Widget _buildGoogleHistoryList() {
     return ListView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: _google_search_count,
       itemBuilder: (context, index) {
         final entry = _googleHistory[index];
@@ -425,10 +425,10 @@ class _MangaProState extends State<MangaPro> {
           child: ListTile(
             title: Text(
               entry['query']!,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             ),
             subtitle: Text(entry['url']!,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
             tileColor: Colors.orange,
             onTap: () async {
               _launchURL(context, entry['url']!);
@@ -472,10 +472,10 @@ class _MangaProState extends State<MangaPro> {
             MaterialStateProperty.all<Color>(Colors.black), // Text color
       ),
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 2500), // Animation duration
+        duration: const Duration(milliseconds: 2500), // Animation duration
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w900,
           ),

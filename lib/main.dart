@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:monmanchitra/Screens/splash_screen.dart';
 import 'package:monmanchitra/mangapro.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-// import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 void main() {
   runApp(
@@ -27,31 +25,9 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return WebViewWithSplashScreen();
-    return SplashScreen1234();
+    return const SplashScreen1234();
 
-    //   AnimatedSplashScreen(
-    //   backgroundColor: Colors.white,
-    //   // splashIconSize: 500,
-    //   // duration: 0,
-    //   // splash: Center(
-    //   //   child: Column(
-    //   //     mainAxisAlignment: MainAxisAlignment.center,
-    //   //     crossAxisAlignment: CrossAxisAlignment.center,
-    //   //     children: [
-    //   //       Image.asset(
-    //   //         '',
-    //   //         // height: 280,
-    //   //         // width: 280,
-    //   //         // alignment: Alignment.center,
-    //   //       ),
-    //   //     ],
-    //   //   ),
-    //   // ),
-    //   splashTransition: SplashTransition.slideTransition,
-    //   pageTransitionType: PageTransitionType.fade,
-    //   nextScreen: WebViewWithSplashScreen(),
-    // );
+
   }
 }
 
@@ -81,7 +57,6 @@ class _WebViewWithSplashScreenState extends State<WebViewWithSplashScreen> {
     history.add(entry);
     await prefs.setStringList('fixedMangaHistory', history);
     setState(() {
-      // Assuming _fixedMangaHistory is your list in state where you want to keep track of URLs
 
       widget.forward_url
           .add({'name': '', 'url': url}); // or whatever structure you need
@@ -121,7 +96,6 @@ class _WebViewWithSplashScreenState extends State<WebViewWithSplashScreen> {
             });
           },
           onWebResourceError: (WebResourceError error) {
-            //debugPrint('MyWebViewWidget:onWebResourceError(): ${error.description}');
             // Hide RefreshIndicator for page reload if showing
             dragGesturePullToRefresh.finished(); // Here
           },
@@ -166,7 +140,7 @@ class _WebViewWithSplashScreenState extends State<WebViewWithSplashScreen> {
       onRefresh: dragGesturePullToRefresh.refresh, // Here
       displacement: Material.defaultSplashRadius,
       color: Colors.orange.shade700,
-      backgroundColor: Color.fromARGB(0, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(0, 0, 0, 0),
 
       child: Builder(builder: (context) {
         dragGesturePullToRefresh.setContext(context); // Here
@@ -176,7 +150,6 @@ class _WebViewWithSplashScreenState extends State<WebViewWithSplashScreen> {
             onWillPop: _handleBackPressed,
             child: Scaffold(
 
-                //wrap this with safe area............................................................................
                 body: Stack(
                   children: [
                     WebViewWidget(
@@ -194,22 +167,9 @@ class _WebViewWithSplashScreenState extends State<WebViewWithSplashScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // Image.asset(
-                              //   'assets/mangaPro.png',
-                              //   height: 150,
-                              //   width: 150,
-                              // ), // Splash screen image
-                              // SizedBox(
-                              //   height: 20,
-                              // ),
-                              // LoadingAnimationWidget.twistingDots(
-                              //   leftDotColor: Color.fromARGB(255, 211, 153, 7),
-                              //   rightDotColor: Color.fromARGB(249, 41, 40, 40),
-                              //   size: 50,
-
-                              // ),
+                              
                               LoadingAnimationWidget.staggeredDotsWave(
-                                  color: Color.fromRGBO(197, 109, 54, 1.0),
+                                  color: const Color.fromRGBO(197, 109, 54, 1.0),
                                   size: 80)
                             ],
                           ),
@@ -232,8 +192,8 @@ class _WebViewWithSplashScreenState extends State<WebViewWithSplashScreen> {
                     splashColor: Colors.orange,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100.0),
-                      side: BorderSide(
-                          color: const Color.fromARGB(36, 0, 0, 0), width: 2.0),
+                      side: const BorderSide(
+                          color: Color.fromARGB(36, 0, 0, 0), width: 2.0),
                     ),
                   ),
                 )),
